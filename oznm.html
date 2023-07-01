@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oznámení</title>
+</head>
+<body>
+    
+<button onclick="lnotif()">Klikni na mě</button>
+
+<script>
+function lnotif(){ 
+if (Notification.permission === 'granted') {
+  sendNotification();
+} else if (Notification.permission !== 'denied') {
+  Notification.requestPermission().then(permission => {
+    if (permission === 'granted') {
+      sendNotification();
+    }
+  });
+}}
+
+function sendNotification() {
+  const notification = new Notification('Toto je oznámení', { body: 'Obsah oznámení' });
+  
+  notification.onclick = function() {
+    // Tento kód se provede při kliknutí na oznámení
+    console.log('Kliknuto na oznámení');
+  };
+
+  notification.onclose = function() {
+    // Tento kód se provede při zavření oznámení
+    console.log('Oznámení zavřeno');
+  };
+}
+
+</script>
+
+
+</body>
+</html>
